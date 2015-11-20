@@ -12,9 +12,15 @@ API_SECRET = "XdoDpYtBr6DFWZPFfdPfZJiZa-TcpoWq"
 api = API(API_KEY, API_SECRET)
 def is_human(URL):
 	ret = api.detection.detect(url = URL)
-	if 'face' in ret:
-		if len(ret['face']) == 0:
-			return "false"
+	if ret != None:
+		if 'face' in ret:
+			if len(ret['face']) == 0:
+				return "false"
+			else:
+				return "true"
 		else:
-			return "true"
+			return "false"
+	else:
+		print URL
+		return URL
 #is_human("https://upload.wikimedia.org/wikipedia/commons/c/c2/Amanita_muscaria_(fly_agaric).JPG")

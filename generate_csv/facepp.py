@@ -216,7 +216,8 @@ class _APIProxy(object):
                 ret = urllib2.urlopen(request, timeout = self._api.timeout).read()
                 break
             except urllib2.HTTPError as e:
-                raise APIError(e.code, url, e.read())
+                #raise APIError(e.code, url, e.read())
+		break ###
             except (socket.error, urllib2.URLError) as e:
                 if retry < 0:
                     raise e
@@ -227,7 +228,8 @@ class _APIProxy(object):
             try:
                 ret = json.loads(ret)
             except:
-                raise APIError(-1, url, 'json decode error, value={0!r}'.format(ret))
+                #raise APIError(-1, url, 'json decode error, value={0!r}'.format(ret))
+		ret = None
         return ret
 
     def _mkarg(self, kargs):
